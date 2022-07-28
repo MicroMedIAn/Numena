@@ -5,7 +5,7 @@
 
 import cv2
 
-from numen.enums import IMAGE_UINT8_POSITIVE
+from numena.enums import IMAGE_UINT8_POSITIVE
 
 
 def threshold_binary(image, threshold, value=IMAGE_UINT8_POSITIVE):

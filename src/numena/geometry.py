@@ -8,8 +8,8 @@ from typing import ClassVar, Tuple
 import cv2
 import numpy as np
 
-from numen.image.contour import contours_fill, contours_find
-from numen.image.morphology import morph_dilate, morph_erode
+from numena.image.contour import contours_fill, contours_find
+from numena.image.morphology import morph_dilate, morph_erode
 
 
 @dataclass

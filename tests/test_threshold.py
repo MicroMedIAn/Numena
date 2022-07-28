@@ -1,6 +1,6 @@
 import unittest
 
-from numen.image.basics import image_new
+from numena.image.basics import image_new
 
 
 class MyTestCase(unittest.TestCase):

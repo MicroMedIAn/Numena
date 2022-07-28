@@ -9,7 +9,7 @@ from scipy import ndimage
 from skimage.feature import peak_local_max
 from skimage.segmentation import watershed
 
-from numen.image.contour import contours_fill, contours_find
+from numena.image.contour import contours_fill, contours_find
 
 
 class WatershedTransform:

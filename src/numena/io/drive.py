@@ -10,7 +10,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from numen.io.image import imread_color, imread_czi, imread_tiff, imwrite, imwrite_tiff
+from numena.io.image import imread_color, imread_czi, imread_tiff, imwrite, imwrite_tiff
 
 EXTENSION_IMAGE_PNG = ".png"
 EXTENSION_IMAGE_JPG = ".jpg"

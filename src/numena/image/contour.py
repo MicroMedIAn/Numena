@@ -6,7 +6,7 @@
 import cv2
 import numpy as np
 
-from numen.enums import IMAGE_UINT8_COLOR_1C, IMAGE_UINT8_COLOR_3C
+from numena.enums import IMAGE_UINT8_COLOR_1C, IMAGE_UINT8_COLOR_3C
 
 
 def contours_convex_hull(contour):

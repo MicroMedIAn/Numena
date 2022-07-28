@@ -4,16 +4,16 @@
 import cv2
 import numpy as np
 
-from numen.enums import IMAGE_UINT8_COLOR_1C, IMAGE_UINT8_COLOR_3C, IMAGE_UINT8_POSITIVE
-from numen.image.basics import image_new
-from numen.image.contour import (
+from numena.enums import IMAGE_UINT8_COLOR_1C, IMAGE_UINT8_COLOR_3C, IMAGE_UINT8_POSITIVE
+from numena.image.basics import image_new
+from numena.image.contour import (
     contour_area,
     contours_convex_hull,
     contours_draw,
     contours_find,
     contours_merge,
 )
-from numen.io.image import imwrite
+from numena.io.image import imwrite
 
 
 def draw_rectangle(image, x: int, y: int, width: int, height: int):
