@@ -56,8 +56,10 @@ class WatershedSkimage(WatershedTransform):
                 else:
                     marker_labels[marker_labels == i] = 0
         else:
-            marker_labels = cv2.connectedComponents(markers, connectivity=8)[1]
+            marker_labels = cv2.connectedComponents(markers, connectivity=8, ltype=cv2.CV_16U)[1]
 
+        # limit the number of markers to 255
+        marker_labels[marker_labels > 255] = 0
         signal_inv = 255 - signal
         labels = watershed(
             signal_inv, markers=marker_labels, mask=mask, watershed_line=True
