@@ -12,9 +12,9 @@ class Figure:
     background_color: tuple = (1, 1, 1)
     hspace: float = 0.25
 
-    def create_panels(self, nrows=2, ncols=2):
+    def create_panels(self, rows=2, cols=2):
         self.__fig, self.panels = plt.subplots(
-            nrows=nrows, ncols=ncols, figsize=self.size, dpi=self.dpi
+            nrows=rows, ncols=cols, figsize=self.size, dpi=self.dpi
         )
         if self.title:
             self.__fig.suptitle(self.title)
