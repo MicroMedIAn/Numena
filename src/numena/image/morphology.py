@@ -27,6 +27,7 @@ class WatershedSkimage(WatershedTransform):
             signal,
             min_distance=self.markers_distance,
             exclude_border=0,
+            num_peaks=255,
         )
         peak_mask = np.zeros_like(signal, dtype=np.uint8)
         peak_mask[tuple(peak_idx.T)] = 1
