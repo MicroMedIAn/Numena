@@ -31,5 +31,11 @@ def imwrite(filename, image):
     cv2.imwrite(filename, image)
 
 
-def imwrite_tiff(filename, image, imagej=True):
-    tifffile.imwrite(filename, image, imagej=imagej)
+def imwrite_tiff(filename, image, imagej=True, luts=None):
+    if luts:
+        tifffile.imwrite(filename,
+                     image,
+                     imagej=imagej,
+                     metadata={'mode': 'composite'},
+                     ijmetadata=luts,
+                    )
