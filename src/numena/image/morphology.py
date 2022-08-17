@@ -27,6 +27,7 @@ class WatershedSkimage(WatershedTransform):
             signal,
             min_distance=self.markers_distance,
             exclude_border=0,
+            # footprint=np.ones((21, 21)),
             num_peaks=255,
         )
         peak_mask = np.zeros_like(signal, dtype=np.uint8)
@@ -37,9 +38,6 @@ class WatershedSkimage(WatershedTransform):
         if self.use_dt:
             signal = ndimage.distance_transform_edt(signal)
         if markers is None:
-            # smooth before getting local_max
-            if not self.use_dt:
-                signal = cv2.GaussianBlur(signal, (5, 5), 0)
             markers = self._extract_markers(signal)
 
         # markers[mask == 0] = 0
