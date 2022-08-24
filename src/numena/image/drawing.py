@@ -41,9 +41,9 @@ def draw_overlay(image, mask, color=None, alpha=1.0, border_color="same", thickn
     overlayed = cv2.addWeighted(img_layer, alpha, out, 1 - alpha, 0, out)
     contours = contours_find(mask, exclude_holes=True)
     if border_color == "same":
-        contours_draw(overlayed, contours, thickness=thickness, color=color)
+        overlayed = contours_draw(overlayed, contours, thickness=thickness, color=color)
     elif border_color is not None:
-        contours_draw(overlayed, contours, thickness=thickness, color=border_color)
+        overlayed = contours_draw(overlayed, contours, thickness=thickness, color=border_color)
     return overlayed
 
 
