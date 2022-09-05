@@ -4,7 +4,11 @@
 import cv2
 import numpy as np
 
-from numena.enums import IMAGE_UINT8_COLOR_1C, IMAGE_UINT8_COLOR_3C, IMAGE_UINT8_POSITIVE
+from numena.enums import (
+    IMAGE_UINT8_COLOR_1C,
+    IMAGE_UINT8_COLOR_3C,
+    IMAGE_UINT8_POSITIVE,
+)
 from numena.image.basics import image_new
 from numena.image.contour import (
     contour_area,
@@ -43,7 +47,9 @@ def draw_overlay(image, mask, color=None, alpha=1.0, border_color="same", thickn
     if border_color == "same":
         overlayed = contours_draw(overlayed, contours, thickness=thickness, color=color)
     elif border_color is not None:
-        overlayed = contours_draw(overlayed, contours, thickness=thickness, color=border_color)
+        overlayed = contours_draw(
+            overlayed, contours, thickness=thickness, color=border_color
+        )
     return overlayed
 
 

@@ -27,7 +27,7 @@ class WatershedSkimage(WatershedTransform):
             signal,
             min_distance=self.markers_distance,
             exclude_border=0,
-            # footprint=np.ones((21, 21)),
+            # footprint=np.ones((21, 21)),
             num_peaks=255,
         )
         peak_mask = np.zeros_like(signal, dtype=np.uint8)
@@ -55,7 +55,9 @@ class WatershedSkimage(WatershedTransform):
                 else:
                     marker_labels[marker_labels == i] = 0
         else:
-            marker_labels = cv2.connectedComponents(markers, connectivity=8, ltype=cv2.CV_16U)[1]
+            marker_labels = cv2.connectedComponents(
+                markers, connectivity=8, ltype=cv2.CV_16U
+            )[1]
 
         # limit the number of markers to 255
         marker_labels[marker_labels > 255] = 0
