@@ -1,14 +1,15 @@
 from __future__ import annotations
 
-import math
 from dataclasses import asdict, astuple, dataclass
-from math import atan2, degrees, pi
+from math import atan2, degrees, pi, radians, cos, sin
 from typing import ClassVar, Tuple
+
 
 import cv2
 import numpy as np
 
 from numena.image.contour import contours_fill, contours_find
+from numena.image.geometry import intersection_with_line
 from numena.image.morphology import morph_dilate, morph_erode
 
 
@@ -74,6 +75,41 @@ Vector2.LEFT = Vector2(-1.0, 0.0)
 Vector2.RIGHT = Vector2(1.0, 0.0)
 
 
+@dataclass
+class Line2:
+    pt1: Vector2
+    pt2: Vector2
+    ZERO: ClassVar[Line2]
+    UP: ClassVar[Line2]
+    DOWN: ClassVar[Line2]
+    LEFT: ClassVar[Line2]
+    RIGHT: ClassVar[Line2]
+
+    @staticmethod
+    def from_point(
+        point: Vector2, angle: float, size: float, centered: bool = False
+    ) -> Line2:
+        angle_rad = radians(angle)
+        angle_rad_inv = radians(angle - 180)
+        if centered:
+            size = size / 2
+            point_1 = point + Vector2(cos(angle_rad_inv), sin(angle_rad_inv)) * size
+        else:
+            point_1 = point
+        point_2 = point + Vector2(cos(angle_rad), sin(angle_rad)) * size
+        return Line2(point_1, point_2)
+
+    def as_int_tuple(self):
+        return self.pt1.as_int_tuple(), self.pt2.as_int_tuple()
+
+
+Line2.ZERO = Line2(Vector2.ZERO, Vector2.ZERO)
+Line2.UP = Line2(Vector2.ZERO, Vector2.UP)
+Line2.DOWN = Line2(Vector2.ZERO, Vector2.DOWN)
+Line2.LEFT = Line2(Vector2.ZERO, Vector2.LEFT)
+Line2.RIGHT = Line2(Vector2.ZERO, Vector2.RIGHT)
+
+
 class MicroEntity:
     def __init__(self, name, custom_data=None):
         self.name = name
@@ -119,7 +155,7 @@ class MicroEntity2D(Vector2, MicroEntity):
 
     @property
     def roundness(self):
-        return 4 * math.pi * (self.area / self.perimeter**2)
+        return 4 * pi * (self.area / self.perimeter**2)
 
     @property
     def min_x(self):
@@ -167,3 +203,31 @@ class Cell2D(MicroEntity2D):
                 else:
                     return Cell2D(cell_name, mask, cx, cy, custom_data=custom_data)
         return None
+
+
+class Synapse(MicroEntity):
+    def __init__(self, cell_1, cell_2, custom_data=None):
+        super().__init__(f"{cell_1.name}-{cell_2.name}", custom_data)
+        self.cell_1 = cell_1
+        self.cell_2 = cell_2
+
+    @property
+    def angle(self):
+        return self.cell_1.angle_with_x_axis(self.cell_2)
+
+    @property
+    def distance(self):
+        return self.cell_1.distance(self.cell_2)
+
+    def front_cell_1(self):
+        line = [self.cell_1.as_int_tuple(), self.cell_2.as_int_tuple()]
+        return intersection_with_line(self.cell_1.mask, line)
+
+    def crop(self, padding=5):
+        synapse_mask = self.cell_1.mask | self.cell_2.mask
+        x, y, w, h = cv2.boundingRect(synapse_mask)
+        x = max(x - padding, 0)
+        y = max(y - padding, 0)
+        w = w + padding * 2
+        h = h + padding * 2
+        return x, y, w, h
