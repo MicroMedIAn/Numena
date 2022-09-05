@@ -33,9 +33,10 @@ def imwrite(filename, image):
 
 def imwrite_tiff(filename, image, imagej=True, luts=None):
     if luts:
-        tifffile.imwrite(filename,
-                     image,
-                     imagej=imagej,
-                     metadata={'mode': 'composite'},
-                     ijmetadata=luts,
-                    )
+        tifffile.imwrite(
+            filename,
+            image,
+            imagej=imagej,
+            metadata={"mode": "composite"},
+            ijmetadata=luts,
+        )
