@@ -2,8 +2,12 @@ import cv2
 import czifile
 import tifffile
 
+from numena.image.color import bgr2rgb
 
-def imread_color(filename):
+
+def imread_color(filename, rgb=False):
+    if rgb:
+        return bgr2rgb(cv2.imread(filename, cv2.IMREAD_COLOR))
     return cv2.imread(filename, cv2.IMREAD_COLOR)
 
 
