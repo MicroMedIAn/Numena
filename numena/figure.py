@@ -12,7 +12,7 @@ class Figure:
     background_color: tuple = (1, 1, 1)
     hspace: float = 0.25
 
-    def create_panels(self, rows=2, cols=2):
+    def create_panels(self, rows=2, cols=2, show_axis=True):
         self.__fig, self.panels = plt.subplots(
             nrows=rows, ncols=cols, figsize=self.size, dpi=self.dpi
         )
@@ -21,6 +21,8 @@ class Figure:
         self.__fig.set_facecolor(self.background_color)
         self.__fig.subplots_adjust(hspace=self.hspace)
         self.panels = self.panels.ravel()
+        if not show_axis:
+            [p.axis("off") for p in self.panels]
 
     def set_panel(self, n, title, image, cmap=None, hide_axis=True):
         panel = self.get_panel(n)
@@ -39,6 +41,9 @@ class Figure:
     def save(self, filename):
         self.__fig.savefig(filename)
 
+    def close(self):
+        plt.close(self.__fig)
+
 
 @dataclass
 class FigureSinglePanel:
@@ -48,11 +53,14 @@ class FigureSinglePanel:
     size: tuple = (12, 12)
     dpi: int = 300
     background_color: tuple = (1, 1, 1)
+    left: float = 0.125
+    right: float = 0.875
 
     def __post_init__(self):
         self.__fig, self.panel = plt.subplots(
             nrows=1, ncols=1, figsize=self.size, dpi=self.dpi
         )
+        self.__fig.subplots_adjust(left=self.left, right=self.right)
         if self.title:
             self.__fig.suptitle(self.title)
         if self.xlabel:
