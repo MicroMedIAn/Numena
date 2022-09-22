@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "numena"
-version = "0.1.0"
+version = "0.0.1.1"
 description = "Image Processing and Analysis toolbox package"
 authors = ["Kévin <cortacero@inserm.fr>"]
 license = "MIT"
