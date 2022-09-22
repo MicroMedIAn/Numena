@@ -94,7 +94,9 @@ class Directory(DriveEntity):
         filepath.mkdir(parents=True, exist_ok=True)
         return Directory(filepath)
 
-    def ls(self, regex="*"):
+    def ls(self, regex="*", ordered=False):
+        if ordered:
+            return sorted(self.glob(regex))
         return self.glob(regex)
 
     def save_as_csv(self, data, filename):
