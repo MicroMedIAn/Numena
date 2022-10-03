@@ -2,8 +2,9 @@
 
 """
 
-
 import cv2
+import numpy as np
+from skimage import color
 
 
 def bgr2hsv(image):
@@ -28,3 +29,11 @@ def gray2rgb(image):
 
 def rgb2gray(image):
     return cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+
+
+def rgb2hed(image):
+    return (color.rgb2hed(image) * 255).astype(np.uint8)
+
+
+def bgr2hed(image):
+    return rgb2hed(bgr2rgb(image))

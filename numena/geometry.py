@@ -1,9 +1,8 @@
 from __future__ import annotations
 
 from dataclasses import asdict, astuple, dataclass
-from math import atan2, degrees, pi, radians, cos, sin
+from math import atan2, cos, degrees, pi, radians, sin
 from typing import ClassVar, Tuple
-
 
 import cv2
 import numpy as np

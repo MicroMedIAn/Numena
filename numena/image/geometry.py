@@ -1,9 +1,9 @@
+import cv2
+import numpy as np
+
 from numena.enums import IMAGE_UINT8_POSITIVE
 from numena.image.basics import image_new
 from numena.image.contour import contours_find
-
-import cv2
-import numpy as np
 
 
 def intersection_with_line(mask, line):

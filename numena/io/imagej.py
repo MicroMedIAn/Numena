@@ -2,7 +2,6 @@
 
 """
 
-
 from roifile import ImagejRoi
 
 

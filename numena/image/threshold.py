@@ -2,7 +2,6 @@
 
 """
 
-
 import cv2
 
 from numena.enums import IMAGE_UINT8_POSITIVE

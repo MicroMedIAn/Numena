@@ -2,7 +2,6 @@
 
 """
 
-
 import zipfile
 from abc import ABC
 from dataclasses import InitVar, dataclass, field
