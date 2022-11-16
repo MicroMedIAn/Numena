@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "numena"
-version = "0.1.2"
+version = "0.1.3"
 description = "Image Processing and Analysis toolbox package"
-authors = ["Kévin <cortacero@inserm.fr>"]
+authors = ["Kevin Cortacero <cortacero@inserm.fr>"]
 license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = ">=3.7,<3.11"
 numpy = "*"
 matplotlib = "*"
 pandas = "*"

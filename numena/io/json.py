@@ -6,14 +6,14 @@ from abc import ABC, abstractmethod
 import simplejson
 
 
-class JSONCompatible(ABC):
+class Serializable(ABC):
     """Python Interface to export Python objects to JSON format.
 
-    The child class must implement 'to_json' property.
+    The child class must implement 'dumps' property.
     """
 
     @abstractmethod
-    def as_json(self):
+    def dumps(self) -> dict:
         """Property to generate the JSON formatted data of the current instance."""
         pass
 
